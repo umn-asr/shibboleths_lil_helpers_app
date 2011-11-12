@@ -1,0 +1,58 @@
+About
+=====
+
+Specs
+=====
+users
+  internet_id
+
+rails g model slh_config_dirs name:string user:belongs_to config_dot_rb:text
+slh_describe:text slh_generate:text slh_generate_updated_at:datetime
+slh_verify_metadata:text slh_verify_metadata_updated_at:datetime
+slh_generate_metadata:text slh_generate_metadata_updated_at:datetime 
+
+configs
+  name
+
+  user_id
+
+  output_from_describe
+  output_updated_at_from_describe
+
+  output_from_generate
+  output_updated_at_from_generate
+
+  output_from_verify_metadata
+  output_updated_at_from_verify_metadata
+
+  output_from_generate_metadata
+  output_updated_at_from_generate_metadata
+
+strategies
+  config_id
+
+  name
+  sp_entity_id
+  idp_metadata_url  
+  error_support_contact
+
+hosts
+  strategy_id
+
+  name
+  host_type
+  shib_prefix
+
+  
+sites
+  host_id
+
+  name
+
+site_paths
+  site_id
+
+  name
+  flavor
+  specific_users
+
