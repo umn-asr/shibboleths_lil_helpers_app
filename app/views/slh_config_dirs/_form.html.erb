@@ -1,0 +1,17 @@
+<%= form_for(@slh_config_dir) do |f| %>
+  <% if @slh_config_dir.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@slh_config_dir.errors.count, "error") %> prohibited this slh_config_dir from being saved:</h2>
+
+      <ul>
+      <% @slh_config_dir.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

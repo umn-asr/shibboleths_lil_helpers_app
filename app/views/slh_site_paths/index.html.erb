@@ -1,0 +1,21 @@
+<h1>Listing slh_site_paths</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @slh_site_paths.each do |slh_site_path| %>
+  <tr>
+    <td><%= link_to 'Show',user_slh_config_dir_slh_strategy_slh_host_slh_site_slh_site_path_path(@user,@slh_config_dir,@slh_strategy, @slh_host, @slh_site, slh_site_path) %></td>
+    <td><%# link_to 'Edit', edit_slh_site_path_path(slh_site_path) %></td>
+    <td><%# link_to 'Destroy', slh_site_path, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%# link_to 'New Slh site path', new_slh_site_path_path %>

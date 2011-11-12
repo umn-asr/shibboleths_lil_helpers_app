@@ -1,0 +1,21 @@
+<h1>Listing slh_strategies</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @slh_strategies.each do |slh_strategy| %>
+  <tr>
+    <td><%= link_to 'Show', user_slh_config_dir_slh_strategy_path(@user,@slh_config_dir, slh_strategy) %></td>
+    <td><%# link_to 'Edit', edit_slh_strategy_path(slh_strategy) %></td>
+    <td><%# link_to 'Destroy', slh_strategy, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Slh strategy', new_user_slh_config_dir_slh_strategy_path(@user,@slh_config_dir)%>

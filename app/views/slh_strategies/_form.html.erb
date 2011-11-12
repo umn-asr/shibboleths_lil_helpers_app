@@ -1,0 +1,17 @@
+<%= form_for(@slh_strategy) do |f| %>
+  <% if @slh_strategy.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@slh_strategy.errors.count, "error") %> prohibited this slh_strategy from being saved:</h2>
+
+      <ul>
+      <% @slh_strategy.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

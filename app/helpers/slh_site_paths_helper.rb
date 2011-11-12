@@ -1,0 +1,2 @@
+module SlhSitePathsHelper
+end

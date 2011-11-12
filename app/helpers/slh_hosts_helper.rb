@@ -1,0 +1,2 @@
+module SlhHostsHelper
+end

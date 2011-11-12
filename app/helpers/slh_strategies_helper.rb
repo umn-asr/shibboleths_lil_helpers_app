@@ -1,0 +1,2 @@
+module SlhStrategiesHelper
+end

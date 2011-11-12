@@ -1,0 +1,21 @@
+<h1>Listing slh_config_dirs</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @slh_config_dirs.each do |slh_config_dir| %>
+  <tr>
+    <td><%= link_to 'Show', user_slh_config_dir_path(@user, slh_config_dir) %></td>
+    <td><%= link_to 'Edit', edit_user_slh_config_dir_path(@user, slh_config_dir) %></td>
+    <td><%= link_to 'Destroy', user_slh_config_dir_path(@user, slh_config_dir), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Slh config dir', new_user_slh_config_dir_path(@user) %>
