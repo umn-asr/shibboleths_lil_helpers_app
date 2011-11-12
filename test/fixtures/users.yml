@@ -1,7 +1,4 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  internet_id: MyString
-
-two:
-  internet_id: MyString
+goggins:
+  internet_id: goggins

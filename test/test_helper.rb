@@ -9,5 +9,6 @@ class ActiveSupport::TestCase
   # -- they do not yet inherit this setting
   fixtures :all
 
+  self.use_instantiated_fixtures = true
   # Add more helper methods to be used by all tests here...
 end

@@ -6,12 +6,9 @@ Specs
 users
   internet_id
 
-rails g model slh_config_dirs name:string user:belongs_to config_dot_rb:text
-slh_describe:text slh_generate:text slh_generate_updated_at:datetime
-slh_verify_metadata:text slh_verify_metadata_updated_at:datetime
-slh_generate_metadata:text slh_generate_metadata_updated_at:datetime 
+rails g model slh_config_dir name:string user:belongs_to config_dot_rb:text slh_describe:text slh_generate:text slh_generate_updated_at:datetime slh_verify_metadata:text slh_verify_metadata_updated_at:datetime slh_generate_metadata:text slh_generate_metadata_updated_at:datetime 
 
-configs
+slh_config_dirs
   name
 
   user_id
@@ -28,13 +25,17 @@ configs
   output_from_generate_metadata
   output_updated_at_from_generate_metadata
 
+
+rails g model slh_strategy name:string slh_config_dir:belongs_to sp_entity_id:string idp_metadata_url:string error_support_contact:string
 strategies
+  name
   config_id
 
-  name
   sp_entity_id
   idp_metadata_url  
   error_support_contact
+
+rails g model slh_host name:string slh_strategy:belongs_to host_type:string shib_prefix:string
 
 hosts
   strategy_id
@@ -43,11 +44,14 @@ hosts
   host_type
   shib_prefix
 
-  
+rails g model slh_site name:string slh_host:belongs_to is_key_originator:boolean site_id:string
+
 sites
   host_id
 
   name
+
+rails g model slh_site_path name:string slh_site:belongs_to flavor:string specific_users:text
 
 site_paths
   site_id

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+config1:
+  name: config1
+  user: goggins
+  config_dot_rb:
+  slh_describe:
+  slh_generate:
+  slh_generate_updated_at:
+  slh_verify_metadata:
+  slh_verify_metadata_updated_at:
+  slh_generate_metadata:
+  slh_generate_metadata_updated_at:

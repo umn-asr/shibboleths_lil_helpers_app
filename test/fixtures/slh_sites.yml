@@ -1,0 +1,7 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+site1:
+  name: shib-rails2-test.asr.umn.edu 
+  slh_host: host1
+  is_key_originator: true
+  site_id:

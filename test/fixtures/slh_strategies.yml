@@ -1,0 +1,8 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+test_idp:
+  name: test_idp
+  slh_config_dir: config1
+  sp_entity_id: https://asr.umn.edu/shibboleth/default
+  idp_metadata_url: https://idp-test.shib.umn.edu/metadata.xml
+  error_support_contact: goggins@umn.edu
