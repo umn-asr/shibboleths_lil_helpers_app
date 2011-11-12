@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'shibboleths_lil_helper', :path => 'lib/shibboleths_lil_helper'
+gem 'POpen4'
 gem 'rails', '3.1.1'
 
 # Bundle edge Rails instead:
