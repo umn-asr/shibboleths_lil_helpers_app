@@ -1,4 +1,6 @@
 ShibbolethsLilHelpersApp::Application.routes.draw do
+  get "main/index"
+
   resources :users do 
     resources :slh_config_dirs do
       resources :slh_strategies do
@@ -61,7 +63,7 @@ ShibbolethsLilHelpersApp::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'users#index'
+  root :to => 'main#index'
 
   # See how all your routes lay out with "rake routes"
 

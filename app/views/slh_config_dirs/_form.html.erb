@@ -1,4 +1,4 @@
-<%= form_for(@slh_config_dir) do |f| %>
+<%= form_for [@user,@slh_config_dir] do |f| %>
   <% if @slh_config_dir.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@slh_config_dir.errors.count, "error") %> prohibited this slh_config_dir from being saved:</h2>
@@ -12,6 +12,7 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.text_field :name %>
+    <%= f.submit "save" %>
   </div>
 <% end %>

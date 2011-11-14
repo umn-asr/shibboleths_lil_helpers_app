@@ -5,3 +5,8 @@
  *= require_self
  *= require_tree . 
 */
+
+pre {
+  background: black;
+  color: white;
+}

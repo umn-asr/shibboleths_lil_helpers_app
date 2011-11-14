@@ -47,7 +47,7 @@ class SlhStrategiesController < ApplicationController
 
     respond_to do |format|
       if @slh_strategy.save
-        format.html { redirect_to @slh_strategy, :notice => 'Slh strategy was successfully created.' }
+        format.html { redirect_to [@user, @slh_config_dir, @slh_strategy], :notice => 'Slh strategy was successfully created.' }
         format.json { render :json => @slh_strategy, :status => :created, :location => @slh_strategy }
       else
         format.html { render :action => "new" }

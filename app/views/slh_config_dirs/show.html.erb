@@ -1,5 +1,13 @@
 <p id="notice"><%= notice %></p>
-
-
+<%= link_to 'Strategies', user_slh_config_dir_slh_strategies_path(@user, @slh_config_dir) %> |
 <%= link_to 'Edit', edit_user_slh_config_dir_path(@user, @slh_config_dir) %> |
 <%= link_to 'Back', user_slh_config_dirs_path(@user) %>
+<h2><%= @slh_config_dir.name %>/shibboleths_lil_helper/config.rb</h2>
+<pre>
+<%= @slh_config_dir.config_dot_rb %>
+</pre>
+<h3>`slh describe`</h3>
+<pre>
+<%= @slh_config_dir.slh_describe %>
+</pre>
+<br />

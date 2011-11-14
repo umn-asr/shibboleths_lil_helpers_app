@@ -1,5 +1,7 @@
 source 'http://rubygems.org'
 
+#gem 'jruby_sandbox'
+
 gem 'shibboleths_lil_helper', :path => 'lib/shibboleths_lil_helper'
 gem 'POpen4'
 gem 'rails', '3.1.1'

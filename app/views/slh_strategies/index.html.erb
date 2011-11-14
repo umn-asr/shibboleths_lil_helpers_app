@@ -2,16 +2,22 @@
 
 <table>
   <tr>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Name</th>
+    <th>SP Entity ID</th>
+    <th>Actions</th>
   </tr>
 
 <% @slh_strategies.each do |slh_strategy| %>
   <tr>
-    <td><%= link_to 'Show', user_slh_config_dir_slh_strategy_path(@user,@slh_config_dir, slh_strategy) %></td>
-    <td><%# link_to 'Edit', edit_slh_strategy_path(slh_strategy) %></td>
-    <td><%# link_to 'Destroy', slh_strategy, :confirm => 'Are you sure?', :method => :delete %></td>
+
+    <td><%= slh_strategy.name %></td>
+    <td><%= slh_strategy.sp_entity_id %></td>
+    <td>
+      <%= link_to "Add host", new_user_slh_config_dir_slh_strategy_slh_host_path(@user,@slh_config_dir,slh_strategy) %>
+      <%= link_to "Show", user_slh_config_dir_slh_strategy_path(@user,@slh_config_dir,slh_strategy) %>
+      <%= link_to "Edit", edit_user_slh_config_dir_slh_strategy_path(@user,@slh_config_dir,slh_strategy) %>
+   
+    </td>
   </tr>
 <% end %>
 </table>

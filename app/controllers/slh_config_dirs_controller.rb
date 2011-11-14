@@ -61,7 +61,7 @@ class SlhConfigDirsController < ApplicationController
 
     respond_to do |format|
       if @slh_config_dir.update_attributes(params[:slh_config_dir])
-        format.html { redirect_to @slh_config_dir, :notice => 'Slh config dir was successfully updated.' }
+        format.html { redirect_to [@user, @slh_config_dir], :notice => 'Slh config dir was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render :action => "edit" }

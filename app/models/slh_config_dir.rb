@@ -47,16 +47,18 @@ end
     File.join(Rails.root,'lib','shibboleths_lil_helper','bin','slh')
   end
 
+  def slh_describe_command
+    "cd #{self.dir_path} && #{self.slh_binary} describe"
+  end
   def write_slh_describe
-    the_command = "cd #{self.dir_path} && #{self.slh_binary} describe"
     stdout_str = ""
     unless
-      Open4::popen4(the_command) { |pid, stdin, stdout, stderr|
+      Open4::popen4(self.slh_describe_command) { |pid, stdin, stdout, stderr|
         stderr_str = stderr.read
         stdout_str = stdout.read
         true
       }
-       raise "COULD NOT do #{the_command}"
+       raise "COULD NOT do #{self.slh_describe_command}"
     end
     puts stdout_str
     self.slh_describe = stdout_str

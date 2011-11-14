@@ -1,4 +1,4 @@
-<%= form_for(@slh_strategy) do |f| %>
+<%= form_for [@user,@slh_config_dir,@slh_strategy] do |f| %>
   <% if @slh_strategy.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@slh_strategy.errors.count, "error") %> prohibited this slh_strategy from being saved:</h2>
@@ -12,6 +12,10 @@
   <% end %>
 
   <div class="actions">
+    Name: <%= f.text_field :name %><br />
+    SP Entity ID: <%= f.text_field :sp_entity_id %><br />
+    IDP Metadata URL: <%= f.text_field :idp_metadata_url %><br />
+    Error Support Contact: <%= f.text_field :error_support_contact %><br />
     <%= f.submit %>
   </div>
 <% end %>

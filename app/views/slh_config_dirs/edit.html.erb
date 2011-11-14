@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @slh_config_dir %> |
-<%= link_to 'Back', slh_config_dirs_path %>
+<%= link_to 'Show', user_slh_config_dir_path(@user, @slh_config_dir) %> |
+<%= link_to 'Back', user_slh_config_dirs_path(@user) %>
