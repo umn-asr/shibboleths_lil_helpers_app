@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-<%= link_to 'Strategies', user_slh_config_dir_slh_strategies_path(@user, @slh_config_dir) %> |
+<%= link_to 'Download tarball',tarball_user_slh_config_dir_path(@user,@slh_config_dir) %>
 <%= link_to 'Edit', edit_user_slh_config_dir_path(@user, @slh_config_dir) %> |
 <%= link_to 'Back', user_slh_config_dirs_path(@user) %>
 <h2><%= @slh_config_dir.name %>/shibboleths_lil_helper/config.rb</h2>

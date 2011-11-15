@@ -1,4 +1,9 @@
 class SlhConfigDirsController < ApplicationController
+
+  def tarball
+    @slh_config_dir = SlhConfigDir.find(params[:id])
+    send_file @slh_config_dir.tarball_path, :filename => @slh_config_dir.download_tarball_file_name
+  end
   # GET /slh_config_dirs
   # GET /slh_config_dirs.json
   before_filter :load_user

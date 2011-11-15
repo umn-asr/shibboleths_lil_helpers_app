@@ -3,6 +3,9 @@ ShibbolethsLilHelpersApp::Application.routes.draw do
 
   resources :users do 
     resources :slh_config_dirs do
+      member do
+        get 'tarball'
+      end
       resources :slh_strategies do
         resources :slh_hosts do
           resources :slh_sites do
