@@ -28,6 +28,7 @@ class SlhConfigDir < ActiveRecord::Base
 
   include ActiveModel::Validations
   validates :name, :presence => true
+  validates :config_dot_rb, :presence => true
   validate do
     self.config_dot_rb.each_line do |line|
       if self.config_dot_rb_line_regexes.values.any? {|regex| regex.match(line)}
@@ -42,6 +43,7 @@ class SlhConfigDir < ActiveRecord::Base
   # before_destroy :clean_up_generated_files
 
   # TODO BUG: need an id to write this on create (when there is no ID)
+  before_save :make_dir_if_it_doesnt_exist
   before_save :write_config_dot_rb
 
   before_save :write_slh_describe
@@ -50,17 +52,19 @@ class SlhConfigDir < ActiveRecord::Base
   before_save :write_slh_generate_metadata
   before_save :generate_tarball
 
-
-  def write_config_dot_rb
+  def make_dir_if_it_doesnt_exist
     require 'fileutils'
     da_dir = File.join(self.dir_path,'shibboleths_lil_helper')
     FileUtils.mkdir_p da_dir
+  end
+
+  def write_config_dot_rb
+    da_dir = File.join(self.dir_path,'shibboleths_lil_helper')
     File.open(File.join(da_dir,'config.rb'),'w') do |f|
       f.print self.config_dot_rb
     end 
   end
 
-  
   def write_slh_describe
     self.write_output_from_command(:slh_describe)
   end
@@ -78,7 +82,7 @@ class SlhConfigDir < ActiveRecord::Base
   end
 
   def generate_tarball_command
-    "cd #{File.join(Rails.root, 'slh_config_dirs')} && tar cvzf #{self.id.to_s}.tar.gz #{self.id.to_s}/"
+    "cd #{File.join(Rails.root, 'slh_config_dirs')} && tar cvzf #{self.permanent_dir_name}.tar.gz #{self.permanent_dir_name}/"
   end
 
   def generate_tarball
@@ -98,8 +102,7 @@ class SlhConfigDir < ActiveRecord::Base
       v += "STDERR:\n"
       v += stderr_str
     end
-    # TODO: write some output from the tarball command
-    # write_attribute(command_sym, v)
+    puts 'yea' # this line eliminates a segfault on 1.8.7, weird
   end
 
   def download_tarball_file_name
@@ -139,9 +142,12 @@ class SlhConfigDir < ActiveRecord::Base
       "cd #{self.dir_path} && #{self.slh_binary} "
     end
     def dir_path
-      File.join(Rails.root, 'slh_config_dirs',self.id.to_s)
+      if self.permanent_dir_name.blank?
+        self.permanent_dir_name = SecureRandom.hex(16)
+      end
+      File.join(Rails.root, 'slh_config_dirs',self.permanent_dir_name)
     end
     def tarball_path
-      File.join(Rails.root, 'slh_config_dirs',"#{self.id.to_s}.tar.gz")
+      File.join(Rails.root, 'slh_config_dirs',"#{self.permanent_dir_name}.tar.gz")
     end
 end

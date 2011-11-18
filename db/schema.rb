@@ -18,11 +18,9 @@ ActiveRecord::Schema.define(:version => 20111112175209) do
     t.text     "config_dot_rb"
     t.text     "slh_describe"
     t.text     "slh_generate"
-    t.datetime "slh_generate_updated_at"
     t.text     "slh_verify_metadata"
-    t.datetime "slh_verify_metadata_updated_at"
     t.text     "slh_generate_metadata"
-    t.datetime "slh_generate_metadata_updated_at"
+    t.string   "permanent_dir_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

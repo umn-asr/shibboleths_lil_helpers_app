@@ -51,10 +51,8 @@ class SlhConfigDirsController < ApplicationController
     respond_to do |format|
       if @slh_config_dir.save
         format.html { redirect_to [@user,@slh_config_dir], :notice => 'Slh config dir was successfully created.' }
-        format.json { render :json => @slh_config_dir, :status => :created, :location => @slh_config_dir }
       else
         format.html { render :action => "new" }
-        format.json { render :json => @slh_config_dir.errors, :status => :unprocessable_entity }
       end
     end
   end
