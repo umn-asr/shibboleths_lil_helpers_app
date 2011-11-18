@@ -9,20 +9,20 @@ class SlhConfigDir < ActiveRecord::Base
     email_regex = /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/
     email_string = /'#{email_regex}'/
     url_string = /'#{URI::regexp}'/
-    string = /'.+?'/
+    string = /[^'\\]+?/ # anything but ' and \ This is makes escapes impossible
     space  = /\s*?/
     symbol = /:\w+?/
     true_or_false = /true|false/
     {'Slh.for_strategy' => /^#{space}Slh.for_strategy#{space}#{symbol}#{space}do#{space}$/,
-     'set :any_symbol, \'any_string\'' => /^#{space}set#{space}#{symbol}#{space},#{space}#{string}#{space}$/,
+     'set :any_symbol, \'any_string\'' => /^#{space}set#{space}#{symbol}#{space},#{space}'#{string}'#{space}$/,
      'set :any_symbol, :any_symbol' => /^#{space}set#{space}#{symbol}#{space},#{space}#{symbol}#{space}$/,
      'set :any_symbol, true or false' => /^#{space}set#{space}#{symbol}#{space},#{space}#{true_or_false}#{space}$/,
      'comment' => /^#{space}\#/,
      'white space' => /^#{space}$/,
      'end statement' => /^#{space}end#{space}$/,
-     'for_apache_host or for_iis_host' => /^#{space}for_apache_host|for_iis_host#{space}#{string}#{space}do#{space}$/,
-     'for_site' => /^#{space}for_site#{space}#{string}#{space}do#{space}$/,
-     'protect_with_block' => /^#{space}protect#{space}#{string}#{space}do#{space}$/
+     'for_apache_host or for_iis_host' => /^#{space}for_apache_host|for_iis_host#{space}'#{string}'#{space}do#{space}$/,
+     'for_site' => /^#{space}for_site#{space}'#{string}'#{space}do#{space}$/,
+     'protect_with_block' => /^#{space}protect#{space}'#{string}'#{space}do#{space}$/
     }
   end
 
