@@ -5,7 +5,8 @@ This intent of this app is to bring Shibboleth's Lil Helper to the web
 
     https://github.com/uofm/shibboleths_lil_helper
 
-This is a work in progress, wildly unstable.
+This is a work in progress, wildly unstable. (but will likely be
+somewhat cool in a week or so (11/28/11).
 
 Developers: How to get this puppy running
 =========================================
@@ -37,7 +38,7 @@ Goto app,click on the config dir, and paste this into the text area:
 * You should see the output of shibboleths lil helper on the config dir
   show page
 
-
-
+* See TODOs.md for some of the crap that I'm working on to make this
+  thing work.
 
 
