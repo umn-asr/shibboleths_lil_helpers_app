@@ -25,6 +25,9 @@ class SlhConfigDir < ActiveRecord::Base
      'protect_with_block' => /^#{space}protect#{space}#{string}#{space}do#{space}$/
     }
   end
+
+  include ActiveModel::Validations
+  validates :name, :presence => true
   validate do
     self.config_dot_rb.each_line do |line|
       if self.config_dot_rb_line_regexes.values.any? {|regex| regex.match(line)}
@@ -35,12 +38,18 @@ class SlhConfigDir < ActiveRecord::Base
     end
   end
 
+  # TODO 
+  # before_destroy :clean_up_generated_files
+
+  # TODO BUG: need an id to write this on create (when there is no ID)
   before_save :write_config_dot_rb
+
   before_save :write_slh_describe
   before_save :write_slh_generate
   before_save :write_slh_verify_metadata
   before_save :write_slh_generate_metadata
   before_save :generate_tarball
+
 
   def write_config_dot_rb
     require 'fileutils'

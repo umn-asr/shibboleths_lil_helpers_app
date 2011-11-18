@@ -1,4 +1,4 @@
-<h1>This is Shibboleth's Lil Helper's App</h1>
+<h1>Hey there <%= current_user.internet_id %>, This is Shibboleth's Lil Helper's App</h1>
 <p>This is a cheezy web-ui for <%= link_to "Shibboleth's Lil Helper", "https://github.com/uofm/shibboleths_lil_helper" -%></p>
 <p>It simply wraps the command line capabilities of the tool...</p>
 <%= link_to "Click here to get started", user_slh_config_dirs_path(@user) %>

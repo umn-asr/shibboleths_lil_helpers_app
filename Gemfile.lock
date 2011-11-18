@@ -1,7 +1,7 @@
 PATH
   remote: lib/shibboleths_lil_helper
   specs:
-    shibboleths_lil_helper (1.0.4)
+    shibboleths_lil_helper (1.0.5)
       activesupport (>= 3.0.9)
       i18n
       nokogiri
@@ -75,7 +75,6 @@ GEM
     mime-types (1.17.2)
     multi_json (1.0.3)
     nokogiri (1.5.0)
-    nokogiri (1.5.0-java)
     open4 (1.2.0)
     polyglot (0.3.3)
     rack (1.3.5)

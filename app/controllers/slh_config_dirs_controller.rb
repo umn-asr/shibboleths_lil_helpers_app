@@ -50,7 +50,7 @@ class SlhConfigDirsController < ApplicationController
 
     respond_to do |format|
       if @slh_config_dir.save
-        format.html { redirect_to @slh_config_dir, :notice => 'Slh config dir was successfully created.' }
+        format.html { redirect_to [@user,@slh_config_dir], :notice => 'Slh config dir was successfully created.' }
         format.json { render :json => @slh_config_dir, :status => :created, :location => @slh_config_dir }
       else
         format.html { render :action => "new" }
@@ -82,7 +82,7 @@ class SlhConfigDirsController < ApplicationController
     @slh_config_dir.destroy
 
     respond_to do |format|
-      format.html { redirect_to slh_config_dirs_url }
+      format.html { redirect_to user_slh_config_dirs_url(@user) }
       format.json { head :ok }
     end
   end

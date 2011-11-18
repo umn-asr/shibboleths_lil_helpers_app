@@ -1,3 +1,6 @@
 [submodule "lib/shibboleths_lil_helper"]
 	path = lib/shibboleths_lil_helper
 	url = git://github.com/umn-asr/shibboleths_lil_helper.git
+[submodule "vendor/plugins/umn_shib_auth"]
+	path = vendor/plugins/umn_shib_auth
+	url = git://github.com/umn-asr/umn_shib_auth.git

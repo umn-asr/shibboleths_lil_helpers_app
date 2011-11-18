@@ -1,8 +1,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  include UmnShibAuth::ControllerMethods
+  before_filter :shib_umn_auth_required
+  def current_user
+    @current_user ||= User.find_or_create_by_internet_id(shib_umn_session.internet_id)
+  end
+  helper_method :current_user
   def load_user
-    @user = User.find(params[:user_id])
+    @user = User.find_by_internet_id(params[:user_id])
   end
 
   def load_slh_config_dir

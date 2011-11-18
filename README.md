@@ -1,6 +1,7 @@
 About
 =====
-This intent of this app is to bring Shibboleth's Lil Helper to the web.
+This intent of this app is to bring Shibboleth's Lil Helper to the web
+(or to run this app on your own instead of learning the command line stuff)
 
     https://github.com/uofm/shibboleths_lil_helper
 
@@ -14,10 +15,9 @@ Developers: How to get this puppy running
 * git submodule update --init
 * bundle
 * rake db:migrate
-* rake db:fixtures:load RAILS_ENV=development
+* STUB_INTERNET_ID=goggins rails s
 
 Goto app,click on the config dir, and paste this into the text area:
-
 
     Slh.for_strategy :test_idp do
       set :sp_entity_id, 'https://asr.umn.edu/shibboleth/default'
