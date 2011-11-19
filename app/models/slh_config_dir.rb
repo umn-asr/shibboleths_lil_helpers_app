@@ -1,3 +1,4 @@
+require 'fileutils'
 class SlhConfigDir < ActiveRecord::Base
   belongs_to :user
   has_many :slh_strategies
@@ -39,76 +40,83 @@ class SlhConfigDir < ActiveRecord::Base
     end
   end
 
-  # TODO 
-  # before_destroy :clean_up_generated_files
-
-  # TODO BUG: need an id to write this on create (when there is no ID)
   before_save :make_dir_if_it_doesnt_exist
   before_save :write_config_dot_rb
-
   before_save :write_slh_describe
   before_save :write_slh_generate
   before_save :write_slh_verify_metadata
   before_save :write_slh_generate_metadata
   before_save :generate_tarball
 
-  def make_dir_if_it_doesnt_exist
-    require 'fileutils'
-    da_dir = File.join(self.dir_path,'shibboleths_lil_helper')
-    FileUtils.mkdir_p da_dir
-  end
-
-  def write_config_dot_rb
-    da_dir = File.join(self.dir_path,'shibboleths_lil_helper')
-    File.open(File.join(da_dir,'config.rb'),'w') do |f|
-      f.print self.config_dot_rb
-    end 
-  end
-
-  def write_slh_describe
-    self.write_output_from_command(:slh_describe)
-  end
-
-  def write_slh_generate
-    self.write_output_from_command(:slh_generate)
-  end
-
-  def write_slh_verify_metadata
-    self.write_output_from_command(:slh_verify_metadata)
-  end
-
-  def write_slh_generate_metadata
-    self.write_output_from_command(:slh_generate_metadata)
-  end
-
-  def generate_tarball_command
-    "cd #{File.join(Rails.root, 'slh_config_dirs')} && tar cvzf #{self.permanent_dir_name}.tar.gz #{self.permanent_dir_name}/"
-  end
-
-  def generate_tarball
-    the_command_string = self.generate_tarball_command
-    stdout_str = ""
-    stderr_str = ""
-    unless
-      Open4::popen4(the_command_string) { |pid, stdin, stdout, stderr|
-        stderr_str = stderr.read
-        stdout_str = stdout.read
-        true
-      }
-       raise "COULD NOT do #{the_command_string}"
+  before_destroy :clean_up_generated_files
+  def dir_path
+    if self.permanent_dir_name.blank?
+      self.permanent_dir_name = SecureRandom.hex(16)
     end
-    v = stdout_str
-    unless stderr_str.blank?
-      v += "STDERR:\n"
-      v += stderr_str
-    end
-    puts 'yea' # this line eliminates a segfault on 1.8.7, weird
+    File.join(Rails.root, 'slh_config_dirs',self.permanent_dir_name)
+  end
+  def tarball_path
+    File.join(Rails.root, 'slh_config_dirs',"#{self.permanent_dir_name}.tar.gz")
   end
 
-  def download_tarball_file_name
-    "#{self.id.to_s}_#{self.name}.tar.gz"
-   end
   protected
+    def make_dir_if_it_doesnt_exist
+      da_dir = File.join(self.dir_path,'shibboleths_lil_helper')
+      FileUtils.mkdir_p da_dir
+    end
+
+    def write_config_dot_rb
+      da_dir = File.join(self.dir_path,'shibboleths_lil_helper')
+      File.open(File.join(da_dir,'config.rb'),'w') do |f|
+        f.print self.config_dot_rb
+      end 
+    end
+
+    def write_slh_describe
+      self.write_output_from_command(:slh_describe)
+    end
+
+    def write_slh_generate
+      self.write_output_from_command(:slh_generate)
+    end
+
+    def write_slh_verify_metadata
+      self.write_output_from_command(:slh_verify_metadata)
+    end
+
+    def write_slh_generate_metadata
+      self.write_output_from_command(:slh_generate_metadata)
+    end
+
+    def generate_tarball_command
+      "cd #{File.join(Rails.root, 'slh_config_dirs')} && tar cvzf #{self.tarball_path} #{self.permanent_dir_name}/"
+    end
+
+    def generate_tarball
+      the_command_string = self.generate_tarball_command
+      stdout_str = ""
+      stderr_str = ""
+      unless
+        Open4::popen4(the_command_string) { |pid, stdin, stdout, stderr|
+          stderr_str = stderr.read
+          stdout_str = stdout.read
+          true
+        }
+         raise "COULD NOT do #{the_command_string}"
+      end
+      v = stdout_str
+      unless stderr_str.blank?
+        v += "STDERR:\n"
+        v += stderr_str
+      end
+      puts 'yea' # this line eliminates a segfault on 1.8.7, weird
+    end
+
+    def clean_up_generated_files
+      FileUtils.rm_rf(self.dir_path)
+      FileUtils.rm_rf(self.tarball_path)
+    end
+
     def slh_binary
       File.join(Rails.root,'lib','shibboleths_lil_helper','bin','slh')
     end
@@ -140,14 +148,5 @@ class SlhConfigDir < ActiveRecord::Base
 
     def slh_command_prefix
       "cd #{self.dir_path} && #{self.slh_binary} "
-    end
-    def dir_path
-      if self.permanent_dir_name.blank?
-        self.permanent_dir_name = SecureRandom.hex(16)
-      end
-      File.join(Rails.root, 'slh_config_dirs',self.permanent_dir_name)
-    end
-    def tarball_path
-      File.join(Rails.root, 'slh_config_dirs',"#{self.permanent_dir_name}.tar.gz")
     end
 end
