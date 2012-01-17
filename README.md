@@ -1,16 +1,14 @@
 About
 =====
-This intent of this app is to bring Shibboleth's Lil Helper to the web
-(or to run this app on your own instead of learning the command line stuff)
+THIS PROJECT IS ABANDONWARE! 
+Use https://github.com/umn-asr/shibboleths_lil_helper instead!
 
-    https://github.com/uofm/shibboleths_lil_helper
-
-This is a work in progress, wildly unstable. (but will likely be
-somewhat cool in a week or so (11/28/11).
+This intent of this app was to bring Shibboleth's Lil Helper to the web, instead of using the command line.  
+If someone has interest in picking this project up, please let me know,
+I'd be happy to tell you what would need to be done to make it happen.
 
 Developers: How to get this puppy running
 =========================================
-
 * git clone git@github.com:uofm/shibboleths_lil_helpers_app.git
 * cd shibboleths_lil_helpers_app/
 * git submodule update --init
